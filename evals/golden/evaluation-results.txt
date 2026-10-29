@@ -1,0 +1,22 @@
+ISSUE  CATEGORY  ACTION  SCHEMA
+-------------------------------------------
+6756  PASS    PASS    FAIL
+6753  PASS    FAIL    FAIL
+6750  PASS    PASS    FAIL
+6742  PASS    PASS    FAIL
+6738  PASS    PASS    FAIL
+6720  PASS    FAIL    FAIL
+6701  FAIL    PASS    FAIL
+6686  PASS    PASS    FAIL
+6680  FAIL    PASS    FAIL
+6676  PASS    PASS    FAIL
+
+SUMMARY
+Category agreement: 8/10
+Action agreement:   8/10
+Schema compliance:  0/10
+
+NOTE: Label validity and duplicate evidence
+require separate repository-context verification.
+This script does not prove skill execution or
+hosted workflow safety.
