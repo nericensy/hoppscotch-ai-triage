@@ -1,0 +1,10 @@
+{
+  "body": "Measured drift on main: ru.json is missing 1212 of 2140 flat keys vs en.json.\n\nFull completion is already prepared (branch ru-locale-completion on fork theluckystrike/hoppscotch — 2140/2140 parity, placeholders preserved, existing translations untouched). Say the word and the PR goes up.\n\nFree for the OSS repo; paid retainer available if you want automated locale-parity CI.",
+  "closedAt": null,
+  "createdAt": "2026-09-24T05:09:42Z",
+  "labels": [],
+  "number": 6676,
+  "state": "OPEN",
+  "title": "Offering: ru locale completion — 1212 keys missing vs en.json (ready to ship)",
+  "url": "https://github.com/hoppscotch/hoppscotch/issues/6676"
+}

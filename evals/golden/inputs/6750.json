@@ -1,0 +1,10 @@
+{
+  "body": "### Bug description\n\nStopping a collection run while it is waiting between requests leaves the runner in the `running` state until the entire configured delay has elapsed. With a 60-second delay, stopping just after a request completes can take nearly a minute. No subsequent request should start after Stop is pressed.\n\n### Steps to reproduce\n\n1. Create a collection with two quick requests and open the collection runner.\n2. Set the delay to 60,000 ms and start the run.\n3. After the first request finishes and before the second starts, press Stop.\n4. Observe that the runner remains running until the delay completes.\n\n### Expected behavior\n\nThe runner should stop promptly while waiting and should not execute the next request.\n\n### Investigation\n\nOn `main` at `63273f8`, the runner awaits a plain `setTimeout` after each request. Its stop ref is checked before starting a request, but it is not observed while waiting. A local regression test against the real `TestRunnerService` fails before a candidate fix and passes with a stop-aware delay. An ordinary run still observes its configured delay.\n\nWould the maintainers welcome a focused fix that cancels the outstanding delay when the stop ref changes? The candidate has been tested with two relevant Vitest files (19 tests passed) and changed-file ESLint. Browser acceptance has not yet been run. AI assistance was used for the investigation and candidate change.\n",
+  "closedAt": null,
+  "createdAt": "2026-10-27T02:09:16Z",
+  "labels": [],
+  "number": 6750,
+  "state": "OPEN",
+  "title": "Collection runner stays running after Stop during a request delay",
+  "url": "https://github.com/hoppscotch/hoppscotch/issues/6750"
+}

@@ -1,0 +1,10 @@
+{
+  "issue_number": 6742,
+  "category": "bug",
+  "suggested_labels": [],
+  "possible_duplicates": [],
+  "missing_information": [],
+  "recommended_action": "review",
+  "explanation": "The GraphQL schema explorer generates duplicate operation names when a second subscription root field is added. The report includes reproduction steps, expected and actual behaviour, and local verification evidence. The issue remains open and requires human review. No duplicate is established, and no labels are suggested without a verified allowed-label list.",
+  "skill_loaded": false
+}

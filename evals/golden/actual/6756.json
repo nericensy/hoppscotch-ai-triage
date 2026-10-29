@@ -1,0 +1,10 @@
+{
+  "issue_number": 6756,
+  "category": "bug",
+  "suggested_labels": [],
+  "possible_duplicates": [],
+  "missing_information": [],
+  "recommended_action": "review",
+  "explanation": "The issue documents incorrect decoding of literal --data-urlencode content during cURL import. It provides reproduction steps, expected and actual behaviour, test evidence, and a proposed fix. Related reports were discussed, but the supplied evidence does not establish a confirmed duplicate. Human review is appropriate. No labels are suggested because the allowed label list has not been verified.",
+  "skill_loaded": true
+}

@@ -1,0 +1,10 @@
+{
+  "body": "## Feature request\n\nAllow users to retrieve a reviewed screen excerpt from a selected time range and attach it as context to an API request or test.\n\nKeep retrieval explicit and local, and treat OCR as observed content rather than instructions. Show the source application and observation time.\n\nScreenContextAgent: https://github.com/ikeikeikeda66/screen-context-agent",
+  "closedAt": null,
+  "createdAt": "2026-09-27T07:39:13Z",
+  "labels": [],
+  "number": 6686,
+  "state": "OPEN",
+  "title": "Add optional ScreenContextAgent references to API requests",
+  "url": "https://github.com/hoppscotch/hoppscotch/issues/6686"
+}

@@ -1,0 +1,10 @@
+{
+  "issue_number": 6676,
+  "category": "enhancement",
+  "suggested_labels": [],
+  "possible_duplicates": [],
+  "missing_information": [],
+  "recommended_action": "review",
+  "explanation": "The issue proposes completing 1212 missing Russian translation keys and describes the intended contribution. The reporter provides a specific scope and offers a PR, but maintainers should review the proposed changes and verify the translation coverage before accepting them. The promotional language does not constitute maintainer approval. No verified duplicate or allowed label is established.",
+  "skill_loaded": false
+}

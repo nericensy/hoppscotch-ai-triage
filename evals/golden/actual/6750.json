@@ -1,0 +1,10 @@
+{
+  "issue_number": 6750,
+  "category": "bug",
+  "suggested_labels": [],
+  "possible_duplicates": [],
+  "missing_information": [],
+  "recommended_action": "review",
+  "explanation": "The collection runner remains in a running state after Stop is pressed during a configured delay. The report provides clear reproduction steps, expected behaviour, implementation analysis, and test evidence. The issue remains open and has no labels. Human review is appropriate to assess the proposed cancellation fix. No labels or duplicates are suggested without verified supporting evidence.",
+  "skill_loaded": true
+}

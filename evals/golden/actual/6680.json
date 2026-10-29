@@ -1,0 +1,13 @@
+{
+  "issue_number": 6680,
+  "category": "bug",
+  "suggested_labels": [],
+  "possible_duplicates": [],
+  "missing_information": [
+    "Which browser, operating system, and Hoppscotch version are affected?",
+    "Does the scrollbar visibility issue occur throughout the application or only on specific pages?"
+  ],
+  "recommended_action": "request_information",
+  "explanation": "The reporter describes poor scrollbar visibility in both light and dark modes and provides screenshots. However, browser, operating system, and application version details are missing. Additional information would help maintainers reproduce and assess the accessibility issue. No verified duplicate or allowed label is established.",
+  "skill_loaded": false
+}

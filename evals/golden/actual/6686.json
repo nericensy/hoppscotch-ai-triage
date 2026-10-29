@@ -1,0 +1,10 @@
+{
+  "issue_number": 6686,
+  "category": "enhancement",
+  "suggested_labels": [],
+  "possible_duplicates": [],
+  "missing_information": [],
+  "recommended_action": "review",
+  "explanation": "The issue proposes an optional ScreenContextAgent feature that allows reviewed screen excerpts to be attached as context to API requests. It describes the intended functionality and privacy-related constraints, including explicit user selection and local treatment of screen content. The issue is open and has no existing labels. Human review is appropriate to assess feasibility and scope. No verified duplicate has been established.",
+  "skill_loaded": false
+}

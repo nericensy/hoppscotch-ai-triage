@@ -1,0 +1,10 @@
+{
+  "issue_number": 6738,
+  "category": "bug",
+  "suggested_labels": [],
+  "possible_duplicates": [],
+  "missing_information": [],
+  "recommended_action": "review",
+  "explanation": "The issue identifies a missing MORE_TYPES notice when a GraphQL root operation type is truncated. It identifies the affected function, relevant code branch, and expected correction. The report provides sufficient technical detail for initial review. The issue remains open, and human review is appropriate. No verified duplicate or allowed label is established.",
+  "skill_loaded": false
+}

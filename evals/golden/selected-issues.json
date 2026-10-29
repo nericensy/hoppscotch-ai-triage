@@ -1,0 +1,122 @@
+[
+  {
+    "body": "### Is there an existing issue for this?\n\nI searched existing issues and PRs for `data-urlencode`, `dataUrlencode`, cURL decoding, percent characters and URIError. Related reports are discussed below; I did not find the same literal-content case.\n\n### Platform / environment\n\nLocal source checkout on Windows, commit `63273f8e599e73f0fb38c0739314e8d46b6bc83d`. Reproduced through the existing Web App cURL parser unit-test path, not a browser session or a deployed release. No interceptor is involved in this import-time failure.\n\n### Bug Description\n\n`--data-urlencode name=content` takes literal content and asks curl to encode it. The importer instead decodes the complete argument before parsing its key/value pair, then decodes the pair again.\n\nFor example:\n\n```sh\ncurl 'https://example.com/api' --data-urlencode 'query=100% free'\n```\n\nCalling `parseCurlToHoppRESTReq` with this command throws `URIError: URI malformed` at the initial `A.map(decodeURIComponent)` in `curlparser.ts`. Other valid inputs import silently with different values:\n\n| Literal argument | Imported value | Expected value |\n| --- | --- | --- |\n| `query=100%25` | `100%` | `100%25` |\n| `query=a%20b` | `a b` | `a%20b` |\n\nThe same literal-content rules apply when `-G` sends the fields as query parameters.\n\n### Evidence\n\nThe [official curl manual](https://curl.se/docs/manpage.html#--data-urlencode) specifies that `name=content` encodes the content while the name is already URL encoded. A local HTTP echo server with real curl 8.21.0 confirms:\n\n```text\ninput: query=100%25\nwire:  query=100%2525\ndecoded by the receiving server: query = 100%25\n```\n\nTwenty local curl requests verified POST / `-G`, literal percent signs, encoded-looking values, plus signs, spaces, equals signs, Unicode, repeated flags and pre-encoded field names. The new parser cases fail against the base implementation (9 failures, 40 passes); a local fix passes the complete cURL helper suite (62 tests across 2 files).\n\n### Proposed fix for discussion\n\nKeep `--data-urlencode` content literal, split at the first `=`, and decode only the already encoded name once, including `+` as a space in the name. Keep the existing handling of ordinary `--data`, `--data-raw`, and URL query parameters. A small tested patch is prepared for review; feedback on the importer contract is welcome.\n\nThis proposal covers inline `name=content` only. It does not add file/stdin loading, the other `--data-urlencode` input forms, mixed data flags or new handling of `--get` option placement.\n\n### Related work\n\n- #3901 / #3905 addressed missing JSON-valued fields in `--data-urlencode` imports; the old issue is closed and PR merged.\n- #5645 proposed broad safe decoding / preprocessing for complex JSON/XML imports and was closed without merging. Its diff does not change the initial `dataUrlencode` decoding.\n- #6353 changes URL sanitization and shell preprocessing, with different regression cases; its diff does not modify this `dataUrlencode` conversion.\n\n\nAI assistance: Codex assisted with investigation, implementation and the executed tests.\n",
+    "closedAt": null,
+    "createdAt": "2026-10-29T01:34:16Z",
+    "labels": [],
+    "number": 6756,
+    "state": "OPEN",
+    "title": "[bug]: cURL import decodes literal --data-urlencode content",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6756"
+  },
+  {
+    "body": "### Is there an existing issue for this?\n\n- [x] I have searched existing issues and this bug hasn't been reported yet\n\n### Platform\n\nWeb App\n\n### Browser\n\nChrome\n\n### Operating System\n\nWindows\n\n### Bug Description\n\nCurrent behavior\n\nI needed to chenge the owner of every table and Data type in my database, but when I update versions (2025.12.1 -> 2026.2.0) Data types change their owners, giving me some troubles to complete the versión update. I noticed that every table mantains the correct owner, so the problema is focused on the Data types: \"MockServerAction\", \"ReqType\", \"TeamAccessRole\", \"WorkspaceType\", FUNCTION public.sync_mock_examples().\n\nThis migration by itself completes, but the way I noticed is because when a second upgrade is done (2026.2.0 -> 2026.9.0) it throws the following error:\n\nRunning database migrations...\nLoaded Prisma config from prisma.config.ts.\nPrisma schema loaded from prisma/schema.prisma.\nDatasource \"db\": PostgreSQL database \"my-database\", schema \"public\" at \"my-rds\"\n22 migrations found in prisma/migrations\nError: P3009\nmigrate found failed migrations in the target database, new migrations will not be applied. Read more about how to resolve migration issues in a production database: https://pris.ly/d/migrate-resolve\nThe `20260713090000_mock_server_gql_examples` migration started at 2026-10-26 10:05:39.846147 UTC failed \n\n### Deployment Type\n\nHoppscotch Cloud\n\n### Version\n\n_No response_",
+    "closedAt": null,
+    "createdAt": "2026-10-27T09:09:54Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTExNzU3NDI1",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d93f0b"
+      },
+      {
+        "id": "MDU6TGFiZWwxNTE0Mjk5NjY5",
+        "name": "need testing",
+        "description": "Needs to be tested before merging onto production",
+        "color": "ffe099"
+      }
+    ],
+    "number": 6753,
+    "state": "OPEN",
+    "title": "[bug]:  Database Data Types owners changing in an update",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6753"
+  },
+  {
+    "body": "### Bug description\n\nStopping a collection run while it is waiting between requests leaves the runner in the `running` state until the entire configured delay has elapsed. With a 60-second delay, stopping just after a request completes can take nearly a minute. No subsequent request should start after Stop is pressed.\n\n### Steps to reproduce\n\n1. Create a collection with two quick requests and open the collection runner.\n2. Set the delay to 60,000 ms and start the run.\n3. After the first request finishes and before the second starts, press Stop.\n4. Observe that the runner remains running until the delay completes.\n\n### Expected behavior\n\nThe runner should stop promptly while waiting and should not execute the next request.\n\n### Investigation\n\nOn `main` at `63273f8`, the runner awaits a plain `setTimeout` after each request. Its stop ref is checked before starting a request, but it is not observed while waiting. A local regression test against the real `TestRunnerService` fails before a candidate fix and passes with a stop-aware delay. An ordinary run still observes its configured delay.\n\nWould the maintainers welcome a focused fix that cancels the outstanding delay when the stop ref changes? The candidate has been tested with two relevant Vitest files (19 tests passed) and changed-file ESLint. Browser acceptance has not yet been run. AI assistance was used for the investigation and candidate change.\n",
+    "closedAt": null,
+    "createdAt": "2026-10-27T02:09:16Z",
+    "labels": [],
+    "number": 6750,
+    "state": "OPEN",
+    "title": "Collection runner stays running after Stop during a request delay",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6750"
+  },
+  {
+    "body": "### Problem\n\nAdding another subscription root field in the schema explorer appends an operation with the selected operation's name. The resulting document has duplicate operation names and cannot execute. Both unified and standalone GraphQL builders are affected on `main` at `63273f8e599e73f0fb38c0739314e8d46b6bc83d`.\n\n### Reproduction\n\nUse `type Query { read: String } type Subscription { first: String second: String }` and this valid document:\n\n```graphql\nsubscription First { first }\n```\n\nPlace the cursor in `First`, open the Subscription root in the schema explorer and add `second`. The builder appends:\n\n```graphql\nsubscription First { second }\n```\n\nGraphQL validation reports `There can be only one operation named \"First\".` The selected operation's in-memory AST is also changed to the new field.\n\nExpected: retain the original subscription and append an independent subscription with one root field and a name unused in the document. Names used by query/mutation operations must also be respected. Adding/removing the same field should retain its existing behavior.\n\n### Verification\n\nReproduced through the production service and standalone composable, real explorer state and GraphQL parse/validate on Windows, Node 22.23.4 and pnpm 10.34.5. Four regressions fail against the original implementations, with ordinary query/mutation and same-field controls passing. No deployed-browser or provider request is claimed.\n\nInvestigated with OpenAI Codex; no real credentials, external APIs or user data are involved.\n",
+    "closedAt": null,
+    "createdAt": "2026-10-26T13:39:30Z",
+    "labels": [],
+    "number": 6742,
+    "state": "OPEN",
+    "title": "GraphQL explorer generates duplicate operation names when adding a second subscription field",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6742"
+  },
+  {
+    "body": "While looking through the AI chat GraphQL schema serializer in `packages/hoppscotch-common/src/helpers/aichat/context-serializers.ts` (lines 47-67 on `main` commit `e633b55`), I noticed that when a root type (`Query`, `Mutation`, or `Subscription`) exceeds `max = Math.min(rootBudget, room())` and gets clipped via `add(truncateText(printed, max - TRUNCATED.length))`, `truncated` is not set to `true`.\n\nIf the remaining non-root types in `schema.getTypeMap()` fit within the remaining budget, `if (truncated) parts.push(MORE_TYPES)` at line 65 is skipped even though the root type definition was truncated (and in `truncateText` on lines 19-24, if `max < 0` is ever passed, `value.slice(0, cut)` slices from the end of `value`). Should `truncated = true` also be set in the `else if (max > TRUNCATED.length)` branch? Happy to send a quick PR if that sounds right!",
+    "closedAt": null,
+    "createdAt": "2026-10-26T10:44:53Z",
+    "labels": [],
+    "number": 6738,
+    "state": "OPEN",
+    "title": "serializeGQLSchema omits MORE_TYPES notice when a root operation type is truncated",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6738"
+  },
+  {
+    "body": "### Is there an existing issue for this?\n\n- [x] I have searched the existing issues\n\n### Summary\n\nI'd like to propose adding an SVG graph showing the growth of Hoppscotch's GitHub stars over time to the project README. This visualization would provide a quick overview of the project's growth and community interest.\n\n### Why should this be worked on?\n\nThe README is often the first place visitors discover a project. A stargazers growth graph would make Hoppscotch's community growth easier to visualize and provide additional context for potential contributors and users. An automatically updated SVG would keep the visualization current while requiring minimal maintenance.",
+    "closedAt": null,
+    "createdAt": "2026-10-14T18:57:50Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTExNzU3NDMw",
+        "name": "feature",
+        "description": "New feature or request",
+        "color": "7af4da"
+      }
+    ],
+    "number": 6720,
+    "state": "OPEN",
+    "title": "[feature]: add a stargazers growth graph to the README",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6720"
+  },
+  {
+    "body": "Hi! 👋\n\nWe are building **Oqerun Store**, an open-source application catalog for Oqerun OS.\n\nWe discovered **Hoppscotch** through GitHub and have added a community listing for it in Oqerun Store:\n- Project: https://github.com/hoppscotch/hoppscotch\n- Store app page: https://vruntime-labs.github.io/oqerun-store/\n- Linked web app: https://hoppscotch.io/\n- License shown in the listing: MIT\n\nThe Store does **not redistribute your source code or claim ownership of your project**. The listing links back to your GitHub repository and hosted application and identifies it as a community project.\n\nIf you would prefer that the listing be changed or removed, please let us know here and we will act on the request.\n\nThanks for building open source! ❤️\n\n— VRuntime Labs / Oqerun Store",
+    "closedAt": "2026-10-02T13:35:25Z",
+    "createdAt": "2026-10-02T13:05:19Z",
+    "labels": [],
+    "number": 6701,
+    "state": "CLOSED",
+    "title": "Oqerun Store listing: Hoppscotch",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6701"
+  },
+  {
+    "body": "## Feature request\n\nAllow users to retrieve a reviewed screen excerpt from a selected time range and attach it as context to an API request or test.\n\nKeep retrieval explicit and local, and treat OCR as observed content rather than instructions. Show the source application and observation time.\n\nScreenContextAgent: https://github.com/ikeikeikeda66/screen-context-agent",
+    "closedAt": null,
+    "createdAt": "2026-09-27T07:39:13Z",
+    "labels": [],
+    "number": 6686,
+    "state": "OPEN",
+    "title": "Add optional ScreenContextAgent references to API requests",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6686"
+  },
+  {
+    "body": "is it possible to make the scrollbar more visible? \ni barely see the scroll in both dark and light mode, it makes me keep losing track on how far i have been scrolling\n\n<img width=\"256\" height=\"245\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c9ab2b8a-3505-4d75-97c0-c73c184d7b14\" />\n<img width=\"230\" height=\"239\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/936eaf1b-8d4c-480a-aef9-4ada452bb8fb\" />",
+    "closedAt": null,
+    "createdAt": "2026-09-25T02:41:16Z",
+    "labels": [],
+    "number": 6680,
+    "state": "OPEN",
+    "title": "scroll bar barely visible",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6680"
+  },
+  {
+    "body": "Measured drift on main: ru.json is missing 1212 of 2140 flat keys vs en.json.\n\nFull completion is already prepared (branch ru-locale-completion on fork theluckystrike/hoppscotch — 2140/2140 parity, placeholders preserved, existing translations untouched). Say the word and the PR goes up.\n\nFree for the OSS repo; paid retainer available if you want automated locale-parity CI.",
+    "closedAt": null,
+    "createdAt": "2026-09-24T05:09:42Z",
+    "labels": [],
+    "number": 6676,
+    "state": "OPEN",
+    "title": "Offering: ru locale completion — 1212 keys missing vs en.json (ready to ship)",
+    "url": "https://github.com/hoppscotch/hoppscotch/issues/6676"
+  }
+]

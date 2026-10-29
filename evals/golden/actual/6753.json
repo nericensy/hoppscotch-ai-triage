@@ -1,0 +1,13 @@
+{
+  "issue_number": 6753,
+  "category": "bug",
+  "suggested_labels": [],
+  "possible_duplicates": [],
+  "missing_information": [
+    "What are the original and resulting owners of the affected database types?",
+    "Can you provide the exact failing migration error preceding P3009?"
+  ],
+  "recommended_action": "review",
+  "explanation": "The report describes database type ownership changes during a version upgrade and a subsequent failed Prisma migration. It identifies affected types, upgrade versions, and the environment. Existing bug and need testing labels are appropriate. The root cause and original migration failure require investigation. Human review is recommended.",
+  "skill_loaded": true
+}
