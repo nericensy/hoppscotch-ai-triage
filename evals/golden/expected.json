@@ -1,12 +1,12 @@
 [
-  {"issue_number":6756,"category":"bug","recommended_action":"review"},
-  {"issue_number":6753,"category":"bug","recommended_action":"review"},
-  {"issue_number":6750,"category":"bug","recommended_action":"review"},
-  {"issue_number":6742,"category":"bug","recommended_action":"review"},
-  {"issue_number":6738,"category":"bug","recommended_action":"review"},
-  {"issue_number":6720,"category":"enhancement","recommended_action":"no_action"},
-  {"issue_number":6701,"category":"question","recommended_action":"no_action"},
-  {"issue_number":6686,"category":"enhancement","recommended_action":"review"},
-  {"issue_number":6680,"category":"bug","recommended_action":"request_information"},
-  {"issue_number":6676,"category":"enhancement","recommended_action":"review"}
+  {"issue_number":6756,"category":"bug","recommended_action":"review","labels":["bug"],"duplicates":[],"should_comment":true},
+  {"issue_number":6753,"category":"bug","recommended_action":"review","labels":["bug"],"duplicates":[],"should_comment":true},
+  {"issue_number":6750,"category":"bug","recommended_action":"review","labels":["bug"],"duplicates":[],"should_comment":true},
+  {"issue_number":6742,"category":"bug","recommended_action":"review","labels":["bug"],"duplicates":[],"should_comment":true},
+  {"issue_number":6738,"category":"bug","recommended_action":"review","labels":["bug"],"duplicates":[],"should_comment":true},
+  {"issue_number":6720,"category":"enhancement","recommended_action":"review","labels":["feature"],"duplicates":[],"should_comment":true},
+  {"issue_number":6701,"category":"question","recommended_action":"no_action","labels":[],"duplicates":[],"should_comment":false},
+  {"issue_number":6686,"category":"enhancement","recommended_action":"review","labels":["feature"],"duplicates":[],"should_comment":true},
+  {"issue_number":6680,"category":"bug","recommended_action":"request_information","labels":["bug"],"duplicates":[],"should_comment":true},
+  {"issue_number":6676,"category":"enhancement","recommended_action":"review","labels":["feature"],"duplicates":[],"should_comment":true}
 ]

@@ -1,23 +1,12 @@
 {
-  "body": "### Is there an existing issue for this?\n\n- [x] I have searched existing issues and this bug hasn't been reported yet\n\n### Platform\n\nWeb App\n\n### Browser\n\nChrome\n\n### Operating System\n\nWindows\n\n### Bug Description\n\nCurrent behavior\n\nI needed to chenge the owner of every table and Data type in my database, but when I update versions (2025.12.1 -> 2026.2.0) Data types change their owners, giving me some troubles to complete the versión update. I noticed that every table mantains the correct owner, so the problema is focused on the Data types: \"MockServerAction\", \"ReqType\", \"TeamAccessRole\", \"WorkspaceType\", FUNCTION public.sync_mock_examples().\n\nThis migration by itself completes, but the way I noticed is because when a second upgrade is done (2026.2.0 -> 2026.9.0) it throws the following error:\n\nRunning database migrations...\nLoaded Prisma config from prisma.config.ts.\nPrisma schema loaded from prisma/schema.prisma.\nDatasource \"db\": PostgreSQL database \"my-database\", schema \"public\" at \"my-rds\"\n22 migrations found in prisma/migrations\nError: P3009\nmigrate found failed migrations in the target database, new migrations will not be applied. Read more about how to resolve migration issues in a production database: https://pris.ly/d/migrate-resolve\nThe `20260713090000_mock_server_gql_examples` migration started at 2026-10-26 10:05:39.846147 UTC failed \n\n### Deployment Type\n\nHoppscotch Cloud\n\n### Version\n\n_No response_",
-  "closedAt": null,
-  "createdAt": "2026-10-27T09:09:54Z",
-  "labels": [
-    {
-      "id": "MDU6TGFiZWwxNTExNzU3NDI1",
-      "name": "bug",
-      "description": "Something isn't working",
-      "color": "d93f0b"
-    },
-    {
-      "id": "MDU6TGFiZWwxNTE0Mjk5NjY5",
-      "name": "need testing",
-      "description": "Needs to be tested before merging onto production",
-      "color": "ffe099"
-    }
-  ],
   "number": 6753,
-  "state": "OPEN",
   "title": "[bug]:  Database Data Types owners changing in an update",
-  "url": "https://github.com/hoppscotch/hoppscotch/issues/6753"
+  "body": "### Is there an existing issue for this?\n\n- [x] I have searched existing issues and this bug hasn't been reported yet\n\n### Platform\n\nWeb App\n\n### Browser\n\nChrome\n\n### Operating System\n\nWindows\n\n### Bug Description\n\nCurrent behavior\n\nI needed to chenge the owner of every table and Data type in my database, but when I update versions (2025.12.1 -> 2026.2.0) Data types change their owners, giving me some troubles to complete the versión update. I noticed that every table mantains the correct owner, so the problema is focused on the Data types: \"MockServerAction\", \"ReqType\", \"TeamAccessRole\", \"WorkspaceType\", FUNCTION public.sync_mock_examples().\n\nThis migration by itself completes, but the way I noticed is because when a second upgrade is done (2026.2.0 -> 2026.9.0) it throws the following error:\n\nRunning database migrations...\nLoaded Prisma config from prisma.config.ts.\nPrisma schema loaded from prisma/schema.prisma.\nDatasource \"db\": PostgreSQL database \"my-database\", schema \"public\" at \"my-rds\"\n22 migrations found in prisma/migrations\nError: P3009\nmigrate found failed migrations in the target database, new migrations will not be applied. Read more about how to resolve migration issues in a production database: https://pris.ly/d/migrate-resolve\nThe `20260713090000_mock_server_gql_examples` migration started at 2026-10-26 10:05:39.846147 UTC failed \n\n### Deployment Type\n\nHoppscotch Cloud\n\n### Version\n\n_No response_",
+  "createdAt": "2026-10-27T09:09:54Z",
+  "url": "https://github.com/hoppscotch/hoppscotch/issues/6753",
+  "labels_at_creation": [
+    "bug"
+  ],
+  "state": "OPEN",
+  "comments": []
 }

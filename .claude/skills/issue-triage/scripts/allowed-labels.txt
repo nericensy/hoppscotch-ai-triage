@@ -1,0 +1,5 @@
+# Labels the agent may suggest. Source: labels observed on hoppscotch/hoppscotch
+# issues Jun-Oct 2026 (evals/golden/hoppscotch-issues.json). Edit via PR only.
+bug
+feature
+need testing

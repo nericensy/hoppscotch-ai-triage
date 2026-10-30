@@ -1,17 +1,12 @@
 {
-  "body": "### Is there an existing issue for this?\n\n- [x] I have searched the existing issues\n\n### Summary\n\nI'd like to propose adding an SVG graph showing the growth of Hoppscotch's GitHub stars over time to the project README. This visualization would provide a quick overview of the project's growth and community interest.\n\n### Why should this be worked on?\n\nThe README is often the first place visitors discover a project. A stargazers growth graph would make Hoppscotch's community growth easier to visualize and provide additional context for potential contributors and users. An automatically updated SVG would keep the visualization current while requiring minimal maintenance.",
-  "closedAt": null,
-  "createdAt": "2026-10-14T18:57:50Z",
-  "labels": [
-    {
-      "id": "MDU6TGFiZWwxNTExNzU3NDMw",
-      "name": "feature",
-      "description": "New feature or request",
-      "color": "7af4da"
-    }
-  ],
   "number": 6720,
-  "state": "OPEN",
   "title": "[feature]: add a stargazers growth graph to the README",
-  "url": "https://github.com/hoppscotch/hoppscotch/issues/6720"
+  "body": "### Is there an existing issue for this?\n\n- [x] I have searched the existing issues\n\n### Summary\n\nI'd like to propose adding an SVG graph showing the growth of Hoppscotch's GitHub stars over time to the project README. This visualization would provide a quick overview of the project's growth and community interest.\n\n### Why should this be worked on?\n\nThe README is often the first place visitors discover a project. A stargazers growth graph would make Hoppscotch's community growth easier to visualize and provide additional context for potential contributors and users. An automatically updated SVG would keep the visualization current while requiring minimal maintenance.",
+  "createdAt": "2026-10-14T18:57:50Z",
+  "url": "https://github.com/hoppscotch/hoppscotch/issues/6720",
+  "labels_at_creation": [
+    "feature"
+  ],
+  "state": "OPEN",
+  "comments": []
 }

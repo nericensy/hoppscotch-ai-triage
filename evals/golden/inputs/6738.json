@@ -1,10 +1,10 @@
 {
-  "body": "While looking through the AI chat GraphQL schema serializer in `packages/hoppscotch-common/src/helpers/aichat/context-serializers.ts` (lines 47-67 on `main` commit `e633b55`), I noticed that when a root type (`Query`, `Mutation`, or `Subscription`) exceeds `max = Math.min(rootBudget, room())` and gets clipped via `add(truncateText(printed, max - TRUNCATED.length))`, `truncated` is not set to `true`.\n\nIf the remaining non-root types in `schema.getTypeMap()` fit within the remaining budget, `if (truncated) parts.push(MORE_TYPES)` at line 65 is skipped even though the root type definition was truncated (and in `truncateText` on lines 19-24, if `max < 0` is ever passed, `value.slice(0, cut)` slices from the end of `value`). Should `truncated = true` also be set in the `else if (max > TRUNCATED.length)` branch? Happy to send a quick PR if that sounds right!",
-  "closedAt": null,
-  "createdAt": "2026-10-26T10:44:53Z",
-  "labels": [],
   "number": 6738,
-  "state": "OPEN",
   "title": "serializeGQLSchema omits MORE_TYPES notice when a root operation type is truncated",
-  "url": "https://github.com/hoppscotch/hoppscotch/issues/6738"
+  "body": "While looking through the AI chat GraphQL schema serializer in `packages/hoppscotch-common/src/helpers/aichat/context-serializers.ts` (lines 47-67 on `main` commit `e633b55`), I noticed that when a root type (`Query`, `Mutation`, or `Subscription`) exceeds `max = Math.min(rootBudget, room())` and gets clipped via `add(truncateText(printed, max - TRUNCATED.length))`, `truncated` is not set to `true`.\n\nIf the remaining non-root types in `schema.getTypeMap()` fit within the remaining budget, `if (truncated) parts.push(MORE_TYPES)` at line 65 is skipped even though the root type definition was truncated (and in `truncateText` on lines 19-24, if `max < 0` is ever passed, `value.slice(0, cut)` slices from the end of `value`). Should `truncated = true` also be set in the `else if (max > TRUNCATED.length)` branch? Happy to send a quick PR if that sounds right!",
+  "createdAt": "2026-10-26T10:44:53Z",
+  "url": "https://github.com/hoppscotch/hoppscotch/issues/6738",
+  "labels_at_creation": [],
+  "state": "OPEN",
+  "comments": []
 }

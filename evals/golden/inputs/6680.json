@@ -1,10 +1,10 @@
 {
-  "body": "is it possible to make the scrollbar more visible? \ni barely see the scroll in both dark and light mode, it makes me keep losing track on how far i have been scrolling\n\n<img width=\"256\" height=\"245\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c9ab2b8a-3505-4d75-97c0-c73c184d7b14\" />\n<img width=\"230\" height=\"239\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/936eaf1b-8d4c-480a-aef9-4ada452bb8fb\" />",
-  "closedAt": null,
-  "createdAt": "2026-09-25T02:41:16Z",
-  "labels": [],
   "number": 6680,
-  "state": "OPEN",
   "title": "scroll bar barely visible",
-  "url": "https://github.com/hoppscotch/hoppscotch/issues/6680"
+  "body": "is it possible to make the scrollbar more visible? \ni barely see the scroll in both dark and light mode, it makes me keep losing track on how far i have been scrolling\n\n<img width=\"256\" height=\"245\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c9ab2b8a-3505-4d75-97c0-c73c184d7b14\" />\n<img width=\"230\" height=\"239\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/936eaf1b-8d4c-480a-aef9-4ada452bb8fb\" />",
+  "createdAt": "2026-09-25T02:41:16Z",
+  "url": "https://github.com/hoppscotch/hoppscotch/issues/6680",
+  "labels_at_creation": [],
+  "state": "OPEN",
+  "comments": []
 }
