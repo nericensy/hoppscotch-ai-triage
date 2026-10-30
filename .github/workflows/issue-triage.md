@@ -35,8 +35,14 @@ safe-outputs:
   add-labels:
     allowed: [bug, feature, need testing]
     max: 3
+    target: triggering
+    issues: true
+    pull-requests: false
   add-comment:
     max: 1
+    target: triggering
+    issues: true
+    pull-requests: false
   create-issue: false
   report-failure-as-issue: false
 ---
