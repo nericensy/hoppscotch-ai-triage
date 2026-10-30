@@ -13,7 +13,7 @@ permissions:
 
 engine:
   id: copilot
-  model: gpt-5          # pinned model name; record the exact one your run log shows
+  model: auto           # let Copilot select an available model at runtime
 
 timeout-minutes: 10
 
